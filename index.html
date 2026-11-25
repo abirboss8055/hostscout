@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HostScout | Domain, Hosting Deals & Free Hosting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">HostScout</h1>
+                <p class="text-slate-400 mt-1 text-sm sm:text-base">Daily automated tracker for domain promos, hosting coupons, and free hosting providers.</p>
+            </div>
+            <div class="flex flex-col sm:items-end text-xs font-mono text-slate-400 gap-1">
+                <span id="last-updated" class="bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-md">Syncing deals...</span>
+                <span id="result-count" class="text-slate-500"></span>
+            </div>
+        </header>
+
+        <!-- Search & Filter Controls -->
+        <section class="flex flex-col lg:flex-row gap-4 mb-8">
+            <div class="relative flex-1">
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search provider, coupon, or spec (e.g. .com, InfinityFree, PHP, SSL)..."
+                    class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                />
+            </div>
+
+            <div id="filter-bar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+                <button data-filter="All" class="filter-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white transition-colors">All</button>
+                <button data-filter="Free Hosting" class="filter-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors">Free Hosting</button>
+                <button data-filter="Domain Deal" class="filter-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors">Domain Deals</button>
+                <button data-filter="Hosting Deal" class="filter-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors">Hosting Deals</button>
+                <button data-filter="Live Deal" class="filter-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors">Live Community Feed</button>
+            </div>
+        </section>
+
+        <!-- Deals Grid -->
+        <main id="deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Populated dynamically -->
+        </main>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20 border border-dashed border-slate-800 rounded-xl">
+            <p class="text-slate-400 text-base font-medium">No matching deals found.</p>
+            <p class="text-slate-500 text-sm mt-1">Try a different search term or switch categories.</p>
+        </div>
+    </div>
+
+    <script>
+        let allDeals = [];
+        let activeFilter = 'All';
+        let searchQuery = '';
+
+        const dealsGrid = document.getElementById('deals-grid');
+        const emptyState = document.getElementById('empty-state');
+        const searchInput = document.getElementById('search-input');
+        const lastUpdatedEl = document.getElementById('last-updated');
+        const resultCountEl = document.getElementById('result-count');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function getCategoryStyle(category) {
+            if (category === 'Free Hosting') return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+            if (category === 'Domain Deal') return 'bg-sky-500/10 text-sky-400 border-sky-500/20';
+            if (category === 'Hosting Deal') return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
+            return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+        }
+
+        async function copyCoupon(code, btnEl) {
+            try {
+                await navigator.clipboard.writeText(code);
+                const original = btnEl.textContent;
+                btnEl.textContent = 'Copied';
+                btnEl.classList.add('bg-emerald-600', 'text-white');
+                btnEl.classList.remove('bg-slate-800', 'text-slate-200');
+                setTimeout(() => {
+                    btnEl.textContent = original;
+                    btnEl.classList.remove('bg-emerald-600', 'text-white');
+                    btnEl.classList.add('bg-slate-800', 'text-slate-200');
+                }, 1500);
+            } catch (err) {
+                console.error('Copy failed:', err);
+            }
+        }
+
+        function renderDeals() {
+            const filtered = allDeals.filter(item => {
+                if (activeFilter !== 'All' && item.category !== activeFilter) return false;
+
+                if (searchQuery) {
+                    const haystack = `${item.provider} ${item.title} ${item.category} ${item.price} ${item.discount || ''} ${item.coupon || ''} ${item.summary || ''} ${(item.specs || []).join(' ')}`.toLowerCase();
+                    return haystack.includes(searchQuery);
+                }
+                return true;
+            });
+
+            resultCountEl.textContent = `Showing ${filtered.length} of ${allDeals.length} offers`;
+            dealsGrid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            filtered.forEach(item => {
+                const specsHtml = (item.specs || []).map(spec =>
+                    `<span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300">${escapeHtml(spec)}</span>`
+                ).join('');
+
+                const summaryHtml = item.summary
+                    ? `<p class="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-3">${escapeHtml(item.summary)}</p>`
+                    : '';
+
+                const couponHtml = item.coupon
+                    ? `<div class="flex items-center justify-between gap-2 bg-slate-950 border border-dashed border-slate-700 rounded-lg px-3 py-2 mb-4">
+                            <span class="text-xs font-mono font-semibold text-emerald-400 tracking-wider">${escapeHtml(item.coupon)}</span>
+                            <button
+                                onclick="copyCoupon('${escapeHtml(item.coupon)}', this)"
+                                class="text-xs font-medium px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
+                            >
+                                Copy Code
+                            </button>
+                       </div>`
+                    : '';
+
+                const card = document.createElement('article');
+                card.className = 'bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col justify-between transition-all';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-full border ${getCategoryStyle(item.category)}">
+                                ${escapeHtml(item.category)}
+                            </span>
+                            <span class="text-xs font-mono text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md">
+                                ${escapeHtml(item.price || 'See Offer')}
+                            </span>
+                        </div>
+
+                        <p class="text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-1">
+                            ${escapeHtml(item.provider)}
+                        </p>
+                        <h2 class="text-lg font-semibold text-white leading-snug mb-2">
+                            ${escapeHtml(item.title)}
+                        </h2>
+
+                        ${summaryHtml}
+
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            ${specsHtml}
+                        </div>
+
+                        ${couponHtml}
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-800/80">
+                        <span class="text-xs text-slate-500">
+                            ${escapeHtml(item.discount || (item.verified ? 'Verified' : 'Auto-Fetched'))}
+                        </span>
+                        <a
+                            href="${escapeHtml(item.url)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
+                        >
+                            Get Offer &rarr;
+                        </a>
+                    </div>
+                `;
+
+                dealsGrid.appendChild(card);
+            });
+        }
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeFilter = btn.dataset.filter;
+                filterButtons.forEach(b => {
+                    b.className = 'filter-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors';
+                });
+                btn.className = 'filter-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white transition-colors';
+                renderDeals();
+            });
+        });
+
+        searchInput.addEventListener('input', e => {
+            searchQuery = e.target.value.trim().toLowerCase();
+            renderDeals();
+        });
+
+        async function init() {
+            try {
+                const res = await fetch('deals.json');
+                if (!res.ok) throw new Error('Failed to load deals.json');
+                const data = await res.json();
+
+                allDeals = data.items || [];
+                lastUpdatedEl.textContent = 'Updated: ' + new Date(data.lastUpdated).toLocaleString();
+                renderDeals();
+            } catch (err) {
+                console.error(err);
+                lastUpdatedEl.textContent = 'Feed unavailable';
+                emptyState.classList.remove('hidden');
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
