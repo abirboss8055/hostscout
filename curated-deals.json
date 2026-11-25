@@ -1,0 +1,110 @@
+[
+  {
+    "id": "free-infinityfree",
+    "provider": "InfinityFree",
+    "title": "Unlimited Free PHP & MySQL Hosting",
+    "category": "Free Hosting",
+    "price": "Free",
+    "discount": "No Forced Ads",
+    "coupon": null,
+    "specs": ["5 GB Disk", "PHP & MySQL", "Free SSL", "No Credit Card"],
+    "url": "https://www.infinityfree.com/",
+    "verified": true
+  },
+  {
+    "id": "free-profreehost",
+    "provider": "ProFreeHost",
+    "title": "Free cPanel-Style Web Hosting",
+    "category": "Free Hosting",
+    "price": "Free",
+    "discount": "Unmetered Bandwidth",
+    "coupon": null,
+    "specs": ["PHP & MySQL", "Free Subdomain", "Site Builder", "No Credit Card"],
+    "url": "https://profreehost.com/",
+    "verified": true
+  },
+  {
+    "id": "free-cloudflare-pages",
+    "provider": "Cloudflare Pages",
+    "title": "Free Global Static & JAMstack Hosting",
+    "category": "Free Hosting",
+    "price": "Free",
+    "discount": "Unlimited Bandwidth",
+    "coupon": null,
+    "specs": ["Git Auto-Deploy", "Free SSL", "Global Edge CDN", "Custom Domains"],
+    "url": "https://pages.cloudflare.com/",
+    "verified": true
+  },
+  {
+    "id": "free-github-pages",
+    "provider": "GitHub Pages",
+    "title": "Free Static Hosting Directly from Repos",
+    "category": "Free Hosting",
+    "price": "Free",
+    "discount": "100% Free",
+    "coupon": null,
+    "specs": ["Static HTML/CSS/JS", "Free HTTPS", "Custom Domain", "CI/CD Ready"],
+    "url": "https://pages.github.com/",
+    "verified": true
+  },
+  {
+    "id": "free-awardspace",
+    "provider": "AwardSpace",
+    "title": "Ad-Free Shared Hosting Starter Plan",
+    "category": "Free Hosting",
+    "price": "Free",
+    "discount": "100% Ad-Free",
+    "coupon": null,
+    "specs": ["1 GB Disk", "5 GB Traffic", "1 MySQL DB", "WordPress Installer"],
+    "url": "https://www.awardspace.com/free-hosting/",
+    "verified": true
+  },
+  {
+    "id": "domain-namecheap-com",
+    "provider": "Namecheap",
+    "title": "New Customer .COM Domain Registration",
+    "category": "Domain Deal",
+    "price": "$6.49/yr",
+    "discount": "Up to 50% Off",
+    "coupon": "NEWCOM649",
+    "specs": [".COM Domain", "Free WHOIS Privacy", "Free DNSSEC"],
+    "url": "https://www.namecheap.com/promos/coupons/",
+    "verified": true
+  },
+  {
+    "id": "domain-porkbun-com",
+    "provider": "Porkbun",
+    "title": "Low-Cost .COM Registration with Free Privacy",
+    "category": "Domain Deal",
+    "price": "$10.08/yr",
+    "discount": "$1 Off First Year",
+    "coupon": "AWESOMENESS",
+    "specs": [".COM Domain", "Free SSL", "Free WHOIS Privacy", "Email Forwarding"],
+    "url": "https://porkbun.com/",
+    "verified": true
+  },
+  {
+    "id": "domain-spaceship-com",
+    "provider": "Spaceship",
+    "title": "Discounted .COM Domain Registration",
+    "category": "Domain Deal",
+    "price": "$5.98/yr",
+    "discount": "Intro Promo",
+    "coupon": "COMPROS",
+    "specs": [".COM Domain", "Free Privacy", "Fast DNS"],
+    "url": "https://www.spaceship.com/",
+    "verified": true
+  },
+  {
+    "id": "host-hostinger-premium",
+    "provider": "Hostinger",
+    "title": "Premium Web Hosting + Free Domain",
+    "category": "Hosting Deal",
+    "price": "$2.99/mo",
+    "discount": "Up to 75% Off",
+    "coupon": "HOSTINGER10",
+    "specs": ["100 Websites", "Free Domain", "Free SSL", "Weekly Backups"],
+    "url": "https://www.hostinger.com/",
+    "verified": true
+  }
+]
