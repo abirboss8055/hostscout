@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-25T00:04:40.373Z",
+  "lastUpdated": "2026-11-26T07:02:14.734Z",
   "totalCount": 21,
   "items": [
     {
@@ -156,6 +156,23 @@
     {
       "id": "leb-1",
       "provider": "LowEndBox Community",
+      "title": "SNEAK PEAK: ServerHost’s Black Friday Vanishing VPS Offers Rise $1 a Day Starting November 28!",
+      "category": "Live Deal",
+      "price": "See Offer",
+      "discount": "Community Deal",
+      "coupon": null,
+      "specs": [
+        "VPS / Hosting",
+        "Auto-Fetched"
+      ],
+      "summary": "ServerHost is jumping the gun on Black Friday and their VPS sale starts today!  The unusual part is the clock. Every advertised annual plan ...",
+      "url": "https://lowendbox.com/blog/sneak-peak-serverhosts-black-friday-vanishing-vps-offers-rise-1-a-day-starting-november-28/",
+      "date": "2026-11-25T12:00:57.000Z",
+      "verified": false
+    },
+    {
+      "id": "leb-2",
+      "provider": "LowEndBox Community",
       "title": "FINAL BONUS CODE for RackNerd's Fall Giveaway! Win a Meta Quest 3, a Synology NAS, a Gaming Monitor and More! Plus Cheap VPS Deals!",
       "category": "Live Deal",
       "price": "See Offer",
@@ -171,7 +188,7 @@
       "verified": false
     },
     {
-      "id": "leb-2",
+      "id": "leb-3",
       "provider": "LowEndBox Community",
       "title": "The Pre-Black-Friday Lab Upgrade: Win $100 + See the 8GB Ryzen/i9 Offer!",
       "category": "Live Deal",
@@ -188,7 +205,7 @@
       "verified": false
     },
     {
-      "id": "leb-3",
+      "id": "leb-4",
       "provider": "LowEndBox Community",
       "title": "RackNerd Black Friday 2026 - The Takeover is LIVE! AdminBolt Hosting, ctrl, and HUNDREDS of GIVEAWAYS!",
       "category": "Live Deal",
@@ -205,7 +222,7 @@
       "verified": false
     },
     {
-      "id": "leb-4",
+      "id": "leb-5",
       "provider": "LowEndBox Community",
       "title": "A Little More Room Before Black Friday: $100 Giveaway + 4GB Ryzen/i9 VPS!",
       "category": "Live Deal",
@@ -222,7 +239,7 @@
       "verified": false
     },
     {
-      "id": "leb-5",
+      "id": "leb-6",
       "provider": "LowEndBox Community",
       "title": "Black Friday Early Bird Sale from Fast Moose!  $15.99/YEAR for Shared Hosting with Unlimited Accounts, Unmetered Bandwidth!",
       "category": "Live Deal",
@@ -239,7 +256,7 @@
       "verified": false
     },
     {
-      "id": "leb-6",
+      "id": "leb-7",
       "provider": "LowEndBox Community",
       "title": "Pre-Black-Friday Warm-Up: Win a $100 Prize and Grab a 2GB Ryzen VPS for Only $22.99/YEAR!",
       "category": "Live Deal",
@@ -256,7 +273,7 @@
       "verified": false
     },
     {
-      "id": "leb-7",
+      "id": "leb-8",
       "provider": "LowEndBox Community",
       "title": "The DediRock High-RAM VPS is Here at Last!  OMG!  8GB RAM for $24.99/YEAR!",
       "category": "Live Deal",
@@ -273,7 +290,7 @@
       "verified": false
     },
     {
-      "id": "leb-8",
+      "id": "leb-9",
       "provider": "LowEndBox Community",
       "title": "LowEndLOLs: Customers to Avoid",
       "category": "Live Deal",
@@ -290,7 +307,7 @@
       "verified": false
     },
     {
-      "id": "leb-9",
+      "id": "leb-10",
       "provider": "LowEndBox Community",
       "title": "Raptors Testing the Fences: Who's Really Commenting on Your Reddit Posts?  Is It &#8220;90% Bots, Guys&#8221;?",
       "category": "Live Deal",
@@ -307,7 +324,7 @@
       "verified": false
     },
     {
-      "id": "leb-10",
+      "id": "leb-11",
       "provider": "LowEndBox Community",
       "title": "MORE CHANCES TO WIN in RackNerd's Fall Giveaway! Win a Meta Quest 3, a Synology NAS, a Gaming Monitor and More! Plus Cheap VPS Deals from $21.99/YEAR!",
       "category": "Live Deal",
@@ -324,7 +341,7 @@
       "verified": false
     },
     {
-      "id": "leb-11",
+      "id": "leb-12",
       "provider": "LowEndBox Community",
       "title": "Two Weeks to Black Friday: Prices You Won't See Until Next Black Friday!",
       "category": "Live Deal",
@@ -338,23 +355,6 @@
       "summary": "Two weeks from today, dear reader, is the most important day in the LowEnd calendar: BLACK FRIDAY!  Mark your calendars: November 27, 2026 i...",
       "url": "https://lowendbox.com/blog/two-weeks-to-black-friday-prices-you-wont-see-until-next-black-friday/",
       "date": "2026-11-13T18:13:03.000Z",
-      "verified": false
-    },
-    {
-      "id": "leb-12",
-      "provider": "LowEndBox Community",
-      "title": "Should You Give X Your Money for a Fat 6% APY?  Read the Fine Print&#8230;",
-      "category": "Live Deal",
-      "price": "See Offer",
-      "discount": "Community Deal",
-      "coupon": null,
-      "specs": [
-        "VPS / Hosting",
-        "Auto-Fetched"
-      ],
-      "summary": "X will offer you 6% on your money, which is an astonishing rate today.  But there is fine print.\nThe post Should You Give X Your Money for a...",
-      "url": "https://lowendbox.com/blog/should-you-give-x-your-money-for-a-fat-6-apy-read-the-fine-print/",
-      "date": "2026-11-12T12:00:40.000Z",
       "verified": false
     }
   ]
